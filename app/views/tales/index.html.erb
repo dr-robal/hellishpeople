@@ -1,0 +1,10 @@
+<h1>Main tales</h1>
+
+
+<% @tales.each do |tale| %>
+
+<%= render 'tale', :tale => tale %>
+
+<% end %>
+<%= will_paginate @tales %>
+

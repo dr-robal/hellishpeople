@@ -1,0 +1,38 @@
+<h2>Administrative User edition</h2>
+
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+
+  <div><%= f.label :username %> <i>(Cannot change login)</i><br />
+  <%= f.text_field :username,:disabled => true %></div>
+
+  <div><%= f.label :email %><br />
+  <%= f.email_field :email %></div>
+
+<% for role in Role.find(:all) %>
+    <div>
+      <%= check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role) %>
+      <%= role.name %>
+    </div>
+  <% end %>
+
+  <div><%= f.submit "Update" %></div>
+<% end %>
+
+<h3>Cancel account</h3>
+
+<p>Bad behavior? <%= link_to 'delete user!', @user, confirm: 'Are you sure?', method: :delete %>.</p>
+
+<%#= link_to "Back", :back %>
+<%= link_to "Back", userslist_path %>

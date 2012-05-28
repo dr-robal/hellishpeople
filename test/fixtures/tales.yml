@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  content: MyText
+  description: MyString
+  user_id: 1
+  main: false
+
+two:
+  content: TextText
+  description:
+  user_id: 1
+  main: false
+
+three:
+  content:
+  description: MyDescription Bla Bla Bla
+  user_id: 1
+  main: false

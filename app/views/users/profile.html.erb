@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<% if @user.deleted_at %>
+  <b>User deleted!</b>
+<% end %>
+
+<p>
+  <h2>Profile: <%= @user.username %></h2>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @user.email %>
+</p>
+
+<% if current_user == @user %>
+  <%= link_to 'Edit my profile', edit_account_path %> |
+<% end %>
+<% if can?(:update, User) && current_user != @user %>
+  <%= link_to 'Edit profile', edit_user_path(@user) %> |
+<% end %>
+  </br>
+  <h3><%= @user.username %> added <%= @user.tales.count %> Tales</h3>
+  <div>
+<% if current_user == @user %>
+  <%= link_to 'Add a tale', new_tale_path %>
+<% end %>
+    
+<% @tales.each do |tale| %>
+  
+<%= render 'tales/tale', :tale => tale %>
+
+<% end %>
+  
+  
+</div>
+<%= will_paginate @tales %>

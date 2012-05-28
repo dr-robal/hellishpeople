@@ -1,0 +1,34 @@
+<div>
+  ------
+  <p>
+    <b><%= link_to tale.user.username, profile_path(tale.user) %></b> | 
+    <%= link_to tale.created_at, tale_path(tale) %>
+            
+      <% if tale.main == false && can?(:tothemain, Tale) %>
+        | <%= link_to 'To the main!', tothemain_path(tale), confirm: 'Are you sure?' %>
+      <% end %>
+      <% if tale.main == true && can?(:totheawaiting, Tale) %>
+        | <%= link_to 'Back to the awaiting!', totheawaiting_path(tale), confirm: 'Are you sure?' %>
+      <% end %>
+  </p>
+  
+
+  <p>
+    <%= tale.content %>
+  </p>
+
+  <p>
+    <small> 
+      <b>Description:</b>
+      <%= tale.description %> | 
+      
+      <% if tale.main == true %>
+        <b>Main</b>
+      <% elsif  %>
+        <b>Awaiting</b>
+      <% end %>
+        | Comments (<%= tale.commentaries.count %>)
+    </small>
+  </p>
+  ------
+</div>
