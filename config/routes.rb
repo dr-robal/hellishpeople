@@ -1,7 +1,7 @@
 PiekielniPl::Application.routes.draw do
   get "comments/new"
 
-  get "comments/create"
+  match 'rules' => 'pages#rules', :as => :rules
 
   get "users/profile"
   match 'profile/:id(/:page)' => 'users#profile', :as => :profile
@@ -25,8 +25,6 @@ PiekielniPl::Application.routes.draw do
 	    resources :comments
   end
   
-  #get "pages/home"
-
   devise_for :users, :controllers => { :registrations => 'registrations' }
 
   devise_scope :user do

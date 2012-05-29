@@ -16,3 +16,6 @@
 
 # Ignore netbeans files
 /nbproject
+
+# Ignore mail configuration
+#/config/initializers/setup_mail.rb

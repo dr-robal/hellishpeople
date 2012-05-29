@@ -1,6 +1,8 @@
 class TalesController < ApplicationController
   before_filter :authenticate_user!, :except => [:index,:awaiting,:show]
   load_and_authorize_resource
+  
+  before_filter :statistics, :only => [:index,:awaitong ]
   # GET /tales
   # GET /tales.json
   def index
@@ -9,7 +11,8 @@ class TalesController < ApplicationController
 
     @tales = Tale.paginate(:page => params[:page], :per_page => 5, :conditions => ['main like ? ', true]).order('created_at DESC')
     
-    @title = 'main'    
+    @title = 'main' 
+    @action_name = 'index'
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @tales }
@@ -21,6 +24,7 @@ class TalesController < ApplicationController
     @tales = Tale.paginate(:page => params[:page], :per_page => 5, :conditions => ['main like ? ', false]).order('created_at DESC')
     
     @title = 'awaiting'
+    @action_name = 'awaiting'
   end
   
   # GET /tales/1
@@ -112,4 +116,12 @@ class TalesController < ApplicationController
     
     redirect_to awaiting_path
   end
+  
+  protected
+    
+    def statistics     
+      @most_tales = User.find :all, :joins => "inner join tales on tales.user_id = users.id", :select => "users.*, count(tales.id) tales_count", :group => "tales.user_id", :order => "tales_count DESC", :limit => 5
+      @most_on_main = User.find :all, :joins => "inner join tales on tales.user_id = users.id", :select => "users.*, count(tales.id) tales_count", :group => "tales.user_id", :order => "tales_count DESC", :limit => 5, :conditions => ["tales.main = ?", true]
+      @most_on_awaiting = User.find :all, :joins => "inner join tales on tales.user_id = users.id", :select => "users.*, count(tales.id) tales_count", :group => "tales.user_id", :order => "tales_count DESC", :limit => 5, :conditions => ["tales.main = ?", false]
+    end
 end

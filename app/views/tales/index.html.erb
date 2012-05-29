@@ -1,4 +1,8 @@
-<h1>Main tales</h1>
+<p id="notice"><%= notice %></p>
+
+<div class="post_top">
+  <div class="post_title"><h1>Main tales</h1></div>
+</div>
 
 
 <% @tales.each do |tale| %>
@@ -6,5 +10,11 @@
 <%= render 'tale', :tale => tale %>
 
 <% end %>
-<%= will_paginate @tales %>
+
+<div class="apple_pagination">
+  <div class="page_info">
+    <%= page_entries_info @tales %>
+  </div>
+  <%= will_paginate @tales %>
+</div>
 

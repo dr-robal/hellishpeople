@@ -1,30 +1,96 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
 <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+  <meta name="description" content=""/>
+  <meta name="keywords" content="" />
+  <meta name="author" content="" />
+  
   <title><%= title %></title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<%= link_to 'Main', root_path %>
-<%= link_to 'Awaiting', :awaiting %>
-<% if user_signed_in? %>
-  <%# if can? :read, @book %>
-    <%#= link_to 'Tales', tales_path %>
-  <%# end %>
-  Logged as: <%= current_user.username %> | 
-  <%= link_to 'Add new tale', new_tale_path %>
-  <%#= link_to 'My books', :mybooks %>
-  <%= link_to 'Profile', profile_path(current_user) %> | 
-  <% if can? :userslist, User %>
-    <%= link_to 'Users list', userslist_path %> |
-  <% end %>
-  <%= link_to 'Logout', logout_path %>
-<% else %>
-  <%= link_to 'Register', register_path %>
-  <%= link_to 'Log in', login_path %>
-<% end %>
-<%= yield %>
+   
+    
+    
+<div id="paper_left">
+<div id="paper_right">
+<div id="layout_wrapper">
+<div id="layout_container">
+<div id="layout_content">
+
+	<div id="site_title">
+		<h1><a href="#">Hellish People</a></h1>
+		<h2>You can meet them every day</h2>
+	</div>
+
+	<div id="header_image"></div>
+
+	<div class="navigation">
+
+		<ul>
+			<li <%= current_page @action_name,'index' %>  ><%= link_to 'Main', root_path %></li>
+			<li <%= current_page @action_name,'awaiting' %> ><%= link_to 'Awaiting', :awaiting %></li>
+                        
+			<li <%= current_page @action_name,'rules' %> ><%= link_to 'Rules',rules_path %></li>
+						
+		</ul>
+
+		<div class="clearer">&nbsp;</div>
+
+	</div>
+
+	<div class="clearer">&nbsp;</div>
+
+	<div class="navigation" id="subnav">
+
+		<ul>
+			<% if user_signed_in? %>
+                          Logged as: <%= current_user.username %> | 
+                          <li><%= link_to 'Add new tale', new_tale_path %></li>
+                          <li><%= link_to 'Profile', profile_path(current_user) %></li>
+                          <% if can? :userslist, User %>
+                            <li><%= link_to 'Users list', userslist_path %></li>
+                          <% end %>
+                          <li><%= link_to 'Logout', logout_path %></li>
+                        <% else %>
+                          <li><%= link_to 'Register', register_path %></li>
+                          <li><%= link_to 'Log in', login_path %></li>
+                        <% end %>
+		</ul>
+
+		<div class="clearer">&nbsp;</div>
+
+	</div>
+
+
+	<div id="main">
+		
+		<%= yield %>
+
+	</div>
+        
+        <% if @most_tales %>
+          <%= render 'layouts/bottom' %>  
+        <% end %>
+        
+        
+	<div id="footer">
+
+		<div class="left">&copy; 2012 Hellish People</div>
+
+		<div class="right"><a href="http://templates.arcsin.se/">Website template</a> by <a href="http://arcsin.se/">Arcsin</a></div>
+
+		<div class="clearer">&nbsp;</div>
+
+	</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
 </body>
 </html>

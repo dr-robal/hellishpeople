@@ -1,7 +1,8 @@
 <li class="comment">
  
-  <p>
-    <b><%= link_to comment.user.username, profile_path(comment.user) %></b> | <%= comment.created_at %> | 
+  <div class="comment_author left">
+    <span class="comment"><b><%= link_to comment.user.username, profile_path(comment.user) %></b></span> | 
+    <div class="date"><%= comment.created_at %> | 
     Answer To:
     <% if comment.commentable_type == 'Tale' %>
       Everyone
@@ -12,7 +13,10 @@
     <% if can?(:update, @comment) || commentowner(comment) %>
       | <%= link_to 'edit comment', edit_comment_path(comment)  %>
     <% end %>
-  </p>
+    </div>
+  </div>
+  
+  <div class="clearer">&nbsp;</div>
   
   <div class="body">
     <%= comment.body %>
@@ -23,8 +27,8 @@
   <% end %>
    
   <% unless comment.comments.empty? %>
-    <ul class="comment_list">
+    <ol class="comment_list">
       <%= render :partial => 'comments/comment', :collection => comment.comments %>
-    </ul>
+    </ol>
   <% end %>
 </li>

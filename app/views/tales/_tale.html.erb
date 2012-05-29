@@ -1,8 +1,8 @@
-<div>
-  ------
-  <p>
-    <b><%= link_to tale.user.username, profile_path(tale.user) %></b> | 
-    <%= link_to tale.created_at, tale_path(tale) %>
+<div class="post">
+  
+  <div class="post_top">
+    <b><%= link_to tale.user.username, profile_path(tale.user) %></b>
+    <div class="post_date"><%= link_to tale.created_at, tale_path(tale) %>
             
       <% if tale.main == false && can?(:tothemain, Tale) %>
         | <%= link_to 'To the main!', tothemain_path(tale), confirm: 'Are you sure?' %>
@@ -10,25 +10,27 @@
       <% if tale.main == true && can?(:totheawaiting, Tale) %>
         | <%= link_to 'Back to the awaiting!', totheawaiting_path(tale), confirm: 'Are you sure?' %>
       <% end %>
-  </p>
+    </div>
+  </div>
   
 
-  <p>
+  <div class="post_body">
     <%= tale.content %>
-  </p>
+  </div>
 
-  <p>
+  <div class="post_metadata">
+    <div class="content">
     <small> 
-      <b>Description:</b>
-      <%= tale.description %> | 
-      
       <% if tale.main == true %>
         <b>Main</b>
       <% elsif  %>
         <b>Awaiting</b>
       <% end %>
-        | Comments (<%= tale.commentaries.count %>)
+      <span class="comment"><%= link_to 'Comments (' + tale.commentaries.count.to_s + ')', tale_path(tale)  %></span>
+      <b>Description:</b>
+      <%= tale.description %>
     </small>
-  </p>
-  ------
+    </div>
+  </div>
+  
 </div>

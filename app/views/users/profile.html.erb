@@ -34,4 +34,11 @@
   
   
 </div>
-<%= will_paginate @tales %>
+
+  
+<div class="apple_pagination">
+  <div class="page_info">
+    <%= page_entries_info @tales %>
+  </div>
+  <%= will_paginate @tales %>
+</div>

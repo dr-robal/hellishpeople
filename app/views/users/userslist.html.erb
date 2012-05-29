@@ -24,4 +24,10 @@
   </tr>
 <% end %>
 </table>
-<%= will_paginate @user %>
+
+<div class="apple_pagination">
+  <div class="page_info">
+    <%= page_entries_info @users %>
+  </div>
+  <%= will_paginate @users %>
+</div>

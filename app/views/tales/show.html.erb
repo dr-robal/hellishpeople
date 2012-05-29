@@ -6,14 +6,20 @@
   <%= link_to 'Edit', edit_tale_path(@tale) %>
 <% end %>
 
-<h2>Comments</h2>
+<h2 class="label" id="comments">Comments</h2>
 
-<% if can? :create, Comment %>
-  <p><%= link_to 'Add a Comment', new_tale_comment_path(@tale) %></p>
-<% else %>
-  You have to be logged to add comment
-<% end %>
- 
-<ul class="comment_list">
-  <%= render :partial => 'comments/comment', :collection => @tale.comments %>
-</ul>
+<div class="post">
+  <div class="post_body nicelist">
+
+  <% if can? :create, Comment %>
+    <p><%= link_to 'Add a Comment', new_tale_comment_path(@tale) %></p>
+  <% else %>
+    <h3>You have to be logged to add comment</h3>
+  <% end %>
+
+  <ol class="comment_list">
+    <%= render :partial => 'comments/comment', :collection => @tale.comments %>
+  </ol>
+
+  </div>
+</div>

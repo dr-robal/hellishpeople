@@ -1,0 +1,37 @@
+<div id="bottom">
+
+		<div class="left col3">
+			
+			<h2>Most tales</h2>
+                        <% @most_tales.each do |most_tale_user| %>
+			<ul>
+				<li><%= link_to  most_tale_user.username + '(' + most_tale_user.tales_count.to_s + ')', profile_path(most_tale_user.id) %></li>
+			</ul>
+                        <% end %>
+
+		</div>
+
+		<div class="left col3">
+
+			<h2>Most on main</h2>
+                        <% @most_on_main.each do |on_main_user| %>
+			<ul>
+				<li><%= link_to  on_main_user.username + '(' + on_main_user.tales_count.to_s + ')', profile_path(on_main_user.id) %></li>
+			</ul>
+                        <% end %>
+
+		</div>
+
+		<div class="right col3last">
+
+			<h2>Most on awaiting</h2>
+			<% @most_on_awaiting.each do |on_awaiting_user| %>
+			<ul>
+				<li><%= link_to  on_awaiting_user.username + '(' + on_awaiting_user.tales_count.to_s + ')', profile_path(on_awaiting_user.id) %></li>
+			</ul>
+                        <% end %>
+		</div>
+
+		<div class="clearer">&nbsp;</div>
+		
+	</div>

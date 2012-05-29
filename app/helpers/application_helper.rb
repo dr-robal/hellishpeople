@@ -9,4 +9,8 @@ module ApplicationHelper
       "#{base_title} | #{@title}"
     end
   end
+  
+  def current_page(action,link)
+    'class="current_page_item"'.html_safe if action == link
+  end
 end
