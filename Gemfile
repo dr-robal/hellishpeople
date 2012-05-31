@@ -5,8 +5,8 @@ gem 'rails', '3.2.2'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'pg'
-gem 'thin'
+#gem 'pg'
+#gem 'thin'
 
 gem 'devise', '~> 2.0.4'
 gem 'cancan', '~> 1.6.7'
